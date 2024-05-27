@@ -1,0 +1,29 @@
+<!-- show.html.erb -->
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <h1 class="text-center mb-4">Kosarad tartalma</h1>
+
+      <% if @order_items.any? %>
+        <div class="list-group">
+          <% @order_items.each do |order_item| %>
+            <div class="list-group-item">
+              <div class="row">
+                <div class="col">
+                  <h2><%= order_item.product.name %></h2>
+                  <p class="mb-1">Mennyiség: <%= order_item.quantity %></p>
+                  <p class="mb-1">Ár: <%= order_item.product.price %> Ft</p>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <p class="alert alert-warning text-center">A kosarad üres.</p>
+      <% end %>
+
+      <%= link_to 'Vissza a termékekhez', products_path, class: "btn btn-outline-primary btn-block mt-4" %>
+    </div>
+  </div>
+</div>
+

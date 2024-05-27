@@ -1,0 +1,23 @@
+one:
+  name: Előétel
+  id: 26
+
+27:
+  name: Leves
+  id: 27
+28:
+  name: Űdítő
+  id: 31
+
+29:
+  name: Pizza
+  id: 29
+
+30:
+  name: Köret
+  id: 28
+
+31:
+  name: Desszert
+  id: 30
+

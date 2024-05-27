@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ar">
+
+<head>
+    <style>
+        .food-image {
+            display: block;
+            margin: 0 auto;
+        }
+
+        td {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <table class="table">
+            <tbody>
+                <% categories = [
+                    { name: 'Előétel', id: 26, image: 'eloetel.png' },
+                    { name: 'Köret', id: 28, image: 'koret.png' },
+                    { name: 'Leves', id: 27, image: 'leves.png' },
+                    { name: 'Pizza', id: 29, image: 'pizza.png' },
+                    { name: 'Desszert', id: 30, image: 'desszert.png' },
+                    { name: 'Üdítő', id: 31, image: 'udito.png' }
+                ] %>
+
+                <% categories.each_slice(3) do |category_slice| %>
+                    <tr>
+                        <% category_slice.each do |category| %>
+                            <td>
+                                <p><%= category[:name] %></p>
+                                <%= link_to category_path(category) do %>
+                                    <%= image_tag(category[:image], alt: category[:name], size: '150x150', class: 'food-image') %>
+                                <% end %>
+                            </td>
+                        <% end %>
+                    </tr>
+                <% end %>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+
+</html>
+

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Form</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<%= form_with(model: @product, local: true, html: { class: "needs-validation", novalidate: true, multipart: true }) do |form| %>
+  <% if @product.errors.any? %>
+    <div class="alert alert-danger">
+      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+      <ul>
+        <% @product.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :descpription, class: "form-label" %>
+    <%= form.text_area :descpription, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :price, class: "form-label" %>
+    <%= form.text_field :price, id: 'price_field', class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :category_id, class: "form-label" %>
+    <%= form.collection_select :category_id, Category.all, :id, :name, { prompt: "Choose a category" }, { class: "form-select" } %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :image, "Upload Image", class: "form-label" %>
+    <%= form.file_field :image, class: "form-control" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.submit 'Save Product', class: "btn btn-primary" %>
+  </div>
+
+  <% if @product.image.attached? %>
+    <div class="mb-3 text-center">
+      <%= image_tag @product.image, class: 'img-thumbnail', alt: 'Product Image', style: 'max-width: 200px;' %>
+    </div>
+  <% end %>
+<% end %>
+
+<script>
+  (function() {
+    'use strict';
+
+    var forms = document.querySelectorAll('.needs-validation');
+
+    Array.prototype.slice.call(forms)
+      .forEach(function(form) {
+        form.addEventListener('submit', function(event) {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+
+          form.classList.add('was-validated');
+        }, false);
+      });
+  })();
+</script>
+
+</body>
+</html>
+

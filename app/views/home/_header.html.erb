@@ -1,0 +1,56 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <%= link_to 'Stop!', root_path, class: 'nav-link', style: 'font-size: 24px; font-weight: bold;', aria_current: 'page' %>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+       <% Category.all.each do |category| %>
+          <li class="nav-item">
+            <%= link_to category.name, category_path(category), class: 'nav-link', aria_current: 'page' %>
+          </li>
+        <% end %>
+        <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            <li class="nav-item">
+              <%= link_to 'Új étel', new_product_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Étel szerkeztése', products_path, class: 'nav-link' %>
+            </li>
+            <li class="nav-item">
+              <%= button_to('Kijelentkezés', destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: 'nav-link') %>
+            </li>
+          <% end %>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to 'Regisztráció', new_user_registration_path, class: 'nav-link', aria_current: 'page' %>
+          </li>
+          <li class="nav-item">
+            <%= button_to 'Belépés', new_user_session_path, class: 'nav-link', aria_current: 'page' %>
+          </li>
+        <% end %>
+   
+      <% if user_signed_in? %>
+        <% unless current_user.admin? %>
+            <li class="nav-item">
+              <%= link_to 'Kosaram', order_path(current_user.orders.find_or_create_by(status: 'pending')), class: 'nav-link', aria_current: 'page' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Szerkesztés', edit_user_registration_path, class: 'nav-link', aria_current: 'page' %>
+            </li>
+            <li class="nav-item">
+              <%= button_to('Kijelentkezés', destroy_user_session_path, method: :delete, data: { turbo_method: :delete }, class: 'nav-link') %>
+            </li>
+          
+        <% end %>
+      <% end %>
+      <li class="nav-item">
+          <%= link_to 'Rólunk', home_about_path, class: 'nav-link', aria_current: 'page' %>
+        </li>
+        </ul>
+    </div>
+  </div>
+</nav>
+

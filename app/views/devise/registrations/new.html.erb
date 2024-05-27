@@ -1,0 +1,67 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="card-title text-center mb-4">Regisztráció</h2>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "form"}) do |f| %>
+            <%= render "devise/shared/error_messages", resource: resource %>
+
+            <div class="mb-3">
+              <%= f.label :first_name, class: "form-label" %><br />
+              <%= f.text_field :first_name, class: "form-control" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :last_name, class: "form-label" %><br />
+              <%= f.text_field :last_name, class: "form-control" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :phone_number, class: "form-label" %><br />
+              <%= f.text_field :phone_number, class: "form-control" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :city, class: "form-label" %><br />
+              <%= f.text_field :city, class: "form-control" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :street_address, class: "form-label" %><br />
+              <%= f.text_field :street_address, class: "form-control" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :postal_code, class: "form-label" %><br />
+              <%= f.text_field :postal_code, class: "form-control" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :email, class: "form-label" %><br />
+              <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :Jelszó, class: "form-label" %>
+              <% if @minimum_password_length %>
+                <em>(<%= @minimum_password_length %> karakter minimum)</em>
+              <% end %><br />
+              <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :Jelszó, class: "form-label" %><br />
+              <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+            </div>
+
+            <div class="text-center">
+              <%= f.submit "Regisztráció", class: "btn btn-primary btn-block" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

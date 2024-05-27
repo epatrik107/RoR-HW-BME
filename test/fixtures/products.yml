@@ -1,0 +1,14 @@
+# fixtures/products.yml
+
+one:
+  name: Előétel 1
+  descpription: Leírás az előételhez
+  price: 10
+  category_id: 26
+
+two:
+  name: Leves 1
+  descpription: Leírás a leveshez
+  price: 8
+  category_id: 27
+

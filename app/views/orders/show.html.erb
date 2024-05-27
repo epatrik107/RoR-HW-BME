@@ -1,0 +1,42 @@
+<div class="container mt-4">
+  <% @order_items.each do |order_item| %>
+    <div class="list-group-item">
+      <div class="row">
+        <div class="col-md-8">
+          <h2><%= order_item.product.name %></h2>
+          <p class="mb-1">Mennyiség: <%= order_item.quantity %></p>
+          <p class="mb-1">Ár: <%= order_item.product.price %> Ft</p>
+        </div>
+        <div class="col-md-4 d-flex align-items-center justify-content-end">
+          <%= form_with model: order_item, url: remove_from_cart_order_path(@order, product_id: order_item.product.id), method: :delete, local: true, remote: true do |form| %>
+            <%= form.select :quantity, options_for_select(1..order_item.quantity, order_item.quantity), { class: 'form-select mb-2' } %>
+            <%= form.submit 'Törlés', class: 'btn btn-outline-danger btn-sm' %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="list-group-item mt-4">
+    <div class="row">
+      <div class="col-md-8">
+        <h4>Végösszeg:</h4>
+      </div>
+      <div class="col-md-4 d-flex align-items-center justify-content-end">
+        <h4><%= @total_price %> Ft</h4>
+      </div>
+    </div>
+  </div>
+
+  <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center mt-4">
+      <%= paginate @order_items %>
+    </ul>
+  </nav>
+
+  <div class="list-group-item mt-4 d-flex justify-content-between">
+    <%= link_to 'Vissza!', root_path, class: 'btn btn-primary' %>
+    <%= link_to 'Rendelés leadása', new_order_path, class: 'btn btn-success', id: 'submit-order-btn' %>
+  </div>
+</div>
+
